@@ -1,0 +1,138 @@
+
+{% extends "admin/base.html" %}
+
+{% block title %}記事管理{% endblock %}
+{% block page_title %}記事管理{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0">
+        <i class="fas fa-list me-2"></i>
+        記事一覧 ({{ posts|length }}件)
+    </h4>
+    <a href="{{ url_for('admin_post_new') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-1"></i>新規作成
+    </a>
+</div>
+
+{% if posts %}
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 50%">タイトル</th>
+                        <th style="width: 15%">作成日</th>
+                        <th style="width: 10%">ステータス</th>
+                        <th style="width: 25%">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>{{ post[1] }}</strong>
+                                {% if not post[3] %}
+                                    <small class="text-muted d-block">下書き状態</small>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <small class="text-muted">
+                                {{ post[2][:10] }}<br>
+                                {{ post[2][11:16] }}
+                            </small>
+                        </td>
+                        <td>
+                            {% if post[3] %}
+                                <span class="badge bg-success">
+                                    <i class="fas fa-eye me-1"></i>公開中
+                                </span>
+                            {% else %}
+                                <span class="badge bg-secondary">
+                                    <i class="fas fa-file me-1"></i>下書き
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <!-- 編集ボタン -->
+                                <a href="{{ url_for('admin_post_edit', post_id=post[0]) }}" 
+                                   class="btn btn-outline-primary" title="編集">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                
+                                <!-- 公開/非公開切り替えボタン -->
+                                <form method="POST" action="{{ url_for('admin_post_toggle', post_id=post[0]) }}" 
+                                      style="display: inline-block;">
+                                    <button type="submit" 
+                                            class="btn btn-outline-{{ 'warning' if post[3] else 'success' }}"
+                                            title="{{ '非公開にする' if post[3] else '公開する' }}">
+                                        <i class="fas fa-{{ 'eye-slash' if post[3] else 'eye' }}"></i>
+                                    </button>
+                                </form>
+                                
+                                <!-- 削除ボタン -->
+                                <button type="button" class="btn btn-outline-danger" 
+                                        onclick="confirmDelete({{ post[0] }}, '{{ post[1] }}')" title="削除">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% else %}
+<!-- 記事がない場合 -->
+<div class="card">
+    <div class="card-body text-center py-5">
+        <i class="fas fa-file-alt fa-4x text-muted mb-4"></i>
+        <h5 class="text-muted mb-3">記事がまだありません</h5>
+        <p class="text-muted mb-4">最初の記事を作成してブログを始めましょう</p>
+        <a href="{{ url_for('admin_post_new') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>記事を作成する
+        </a>
+    </div>
+</div>
+{% endif %}
+
+<!-- 削除確認モーダル -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">記事を削除</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>本当に「<strong id="deleteTitle"></strong>」を削除しますか？</p>
+                <p class="text-muted small">この操作は取り消すことができません。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                <form id="deleteForm" method="POST" style="display: inline-block;">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i>削除する
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function confirmDelete(postId, title) {
+    document.getElementById('deleteTitle').textContent = title;
+    document.getElementById('deleteForm').action = '/admin/post/' + postId + '/delete';
+    new bootstrap.Modal(document.getElementById('deleteModal')).show();
+}
+</script>
+{% endblock %}

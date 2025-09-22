@@ -1,0 +1,189 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}ページが見つかりません{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 text-center">
+        <div class="card">
+            <div class="card-body py-5">
+                <!-- 404アイコン -->
+                <div class="mb-4">
+                    <i class="fas fa-exclamation-triangle fa-5x text-warning"></i>
+                </div>
+                
+                <!-- メイン見出し -->
+                <h1 class="display-1 fw-bold text-primary mb-3">404</h1>
+                <h2 class="h4 mb-3">ページが見つかりません</h2>
+                
+                <!-- 説明文 -->
+                <p class="lead text-muted mb-4">
+                    お探しのページは存在しないか、移動または削除された可能性があります。<br>
+                    URLをご確認いただくか、以下のリンクから他のページをご利用ください。
+                </p>
+                
+                <!-- アクションボタン -->
+                <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mb-5">
+                    <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-home me-2"></i>
+                        ホームページに戻る
+                    </a>
+                    <a href="{{ url_for('posts_list') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-list me-2"></i>
+                        記事一覧を見る
+                    </a>
+                </div>
+                
+                <!-- 検索機能（将来拡張用） -->
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" 
+                                   class="form-control" 
+                                   placeholder="記事タイトルで検索..."
+                                   id="searchInput">
+                            <button class="btn btn-outline-secondary" 
+                                    type="button" 
+                                    onclick="searchPosts()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <small class="text-muted">
+                            ※現在は記事一覧ページに移動します
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 人気記事・リンク集 -->
+        <div class="row mt-5">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-star me-2"></i>
+                            おすすめページ
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <a href="{{ url_for('home') }}" class="text-decoration-none">
+                                    <i class="fas fa-home me-2"></i>ホームページ
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ url_for('about') }}" class="text-decoration-none">
+                                    <i class="fas fa-user me-2"></i>プロフィール
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ url_for('posts_list') }}" class="text-decoration-none">
+                                    <i class="fas fa-newspaper me-2"></i>技術記事一覧
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ url_for('contact') }}" class="text-decoration-none">
+                                    <i class="fas fa-envelope me-2"></i>お問い合わせ
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            こんなことありませんか？
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled text-muted small">
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                ブックマークしたページが見つからない
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                検索エンジンから古いリンクでアクセスした
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                URLを直接入力してタイプミスがあった
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                サイトの構成が変更された
+                            </li>
+                        </ul>
+                        <p class="small text-primary">
+                            <i class="fas fa-info-circle me-1"></i>
+                            上記に当てはまる場合は、ホームページから改めてお探しください。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// 検索機能（シンプル版）
+function searchPosts() {
+    const searchTerm = document.getElementById('searchInput').value.trim();
+    if (searchTerm) {
+        // 実際の検索機能が実装されるまでは記事一覧ページに移動
+        window.location.href = "{{ url_for('posts_list') }}";
+    } else {
+        document.getElementById('searchInput').focus();
+    }
+}
+
+// Enterキーで検索
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        searchPosts();
+    }
+});
+
+// ページロード時のアニメーション
+document.addEventListener('DOMContentLoaded', function() {
+    const elements = document.querySelectorAll('.card, .btn');
+    elements.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+});
+
+// 自動的にホームページへリダイレクト（オプション）
+// 10秒後に自動リダイレクト
+let countdown = 30;
+const redirectTimer = setInterval(function() {
+    countdown--;
+    if (countdown === 0) {
+        window.location.href = "{{ url_for('home') }}";
+    }
+}, 1000);
+
+// ユーザーが何かアクションを起こしたらタイマーを停止
+document.addEventListener('click', function() {
+    clearInterval(redirectTimer);
+});
+
+document.addEventListener('keypress', function() {
+    clearInterval(redirectTimer);
+});
+</script>
+{% endblock %}

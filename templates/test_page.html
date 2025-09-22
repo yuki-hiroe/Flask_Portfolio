@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テストページ</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1>テストページ</h1>
+                <p>このページが表示されていれば、基本的な認証は機能しています。</p>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>セッション情報</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>ログイン状態:</strong> {{ 'ログイン中' if session.admin_logged_in else '未ログイン' }}</p>
+                        <p><strong>ユーザー名:</strong> {{ session.admin_username or '未設定' }}</p>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-primary">ダッシュボードへ</a>
+                    <a href="{{ url_for('admin_posts') }}" class="btn btn-secondary">記事一覧へ</a>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">ログアウト</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

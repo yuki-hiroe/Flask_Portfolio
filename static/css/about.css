@@ -1,0 +1,33 @@
+.timeline-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 20px;
+    bottom: -20px;
+    width: 2px;
+    background: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.skill-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
+}

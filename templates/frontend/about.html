@@ -1,0 +1,326 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}プロフィール{% endblock %}
+
+{% block content %}
+<!-- プロフィールヘッダー -->
+<div class="profile-section">
+    <div class="row align-items-center">
+        <div class="col-md-4 text-center mb-4 mb-md-0">
+            <img src="https://billboard-japan.com/scale/news/00000116/116078/800x_image.jpg"
+                 alt="プロフィール画像" 
+                 class="rounded-circle img-fluid shadow-lg" 
+                 style="width: 250px; height: 250px; object-fit: cover;">
+        </div>
+        <div class="col-md-8">
+            <h1 class="display-4 fw-bold mb-3">
+                <i class="fas fa-user-circle me-3"></i>
+                Profile
+            </h1>
+            <h2 class="h3 text-primary mb-3">タピオカ職人</h2>
+            <p class="lead mb-4">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Cumque cupiditate est expedita optio quibusdam?
+                liquam amet at aut doloremque ea,
+                earum illum incidunt maxime non quasi quo reiciendis temporibus ullam!
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ url_for('posts_list') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-newspaper me-2"></i>技術記事を見る
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- メイン情報 -->
+    <div class="col-lg-8">
+        <!-- 経歴 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="h5 mb-0">
+                    <i class="fas fa-briefcase me-2"></i>
+                    経歴・キャリア
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    <div class="timeline-item mb-4">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="timeline-marker bg-primary"></div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold">2025年 - 現在</h6>
+                                <h6 class="text-primary">転職活動中</h6>
+                                <p class="text-muted">
+                                    Web開発エンジニアを目指して現在学習中。<br>
+                                    エンジニアとしては未経験である。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item mb-4">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="timeline-marker bg-success"></div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold">2024年 - 2025年</h6>
+                                <h6 class="text-primary">タピオカ職人</h6>
+                                <p class="text-muted">
+                                    アジアンティーカフェ「Gong Cha」でタピオカを作っている。<br>
+                                    エンジニアを目指し、仕事の合間を縫いながらITスクール「RareTECH」に通い学習中。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="timeline-marker bg-info"></div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold">2023年 - 2023年 8月</h6>
+                                <h6 class="text-primary">新入社員</h6>
+                                <p class="text-muted">
+                                    大学卒業後、新卒でIT業界に入社。<br>
+                                    新人研修を通して、Javaを学習。<br>
+                                    早期退職をしている。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- プロジェクト -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="h5 mb-0">
+                    <i class="fas fa-code me-2"></i>
+                    プロジェクト
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card bg-light h-100">
+                            <div class="card-body">
+                                <h6 class="fw-bold">個人ブログ</h6>
+                                <p class="text-muted small">
+                                    Python/Flask + Bootstrap を使用した個人ブログアプリケーション。
+                                    管理画面、記事投稿、レスポンシブデザイン対応。
+                                </p>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span class="badge bg-primary">Python</span>
+                                    <span class="badge bg-success">Flask</span>
+                                    <span class="badge bg-info">Bootstrap</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 学習・資格 -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="h5 mb-0">
+                    <i class="fas fa-graduation-cap me-2"></i>
+                    学習・資格
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-3">保有資格</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-certificate text-warning me-2"></i>
+                                ITパスポート
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-certificate text-info me-2"></i>
+                                TOEIC 550点
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-certificate text-dark me-2"></i>
+                                普通自動車運転免許
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-3">継続学習中</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-book text-primary me-2"></i>
+                                Python プログラミング言語
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-book text-primary me-2"></i>
+                                Flask フレームワーク
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-book text-primary me-2"></i>
+                                JavaScript プログラミング言語
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-book text-success me-2"></i>
+                                AWS クラウドサービス
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- サイドバー -->
+    <div class="col-lg-4">
+        <!-- スキル -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-tools me-2"></i>
+                    技術スキル
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h6 class="fw-bold">プログラミング言語</h6>
+                    <div class="d-flex flex-wrap gap-1 mb-3">
+                        <span class="badge bg-primary">Python</span>
+                        <span class="badge bg-warning">JavaScript</span>
+                        <span class="badge bg-success">Java</span>
+                        <span class="badge bg-info">HTML/CSS</span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h6 class="fw-bold">フレームワーク</h6>
+                    <div class="d-flex flex-wrap gap-1 mb-3">
+                        <span class="badge bg-success">Flask</span>
+                        <span class="badge bg-primary">React</span>
+                        <span class="badge bg-secondary">Bootstrap</span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h6 class="fw-bold">データベース</h6>
+                    <div class="d-flex flex-wrap gap-1 mb-3">
+                        <span class="badge bg-info">PostgreSQL</span>
+                        <span class="badge bg-warning">SQLite</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h6 class="fw-bold">その他</h6>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="badge bg-dark">Git</span>
+                        <span class="badge bg-primary">Docker</span>
+                        <span class="badge bg-warning">Linux</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 連絡先 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-address-card me-2"></i>
+                    基本情報
+                </h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                        <strong>所在地:</strong> 千葉県
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-briefcase text-primary me-2"></i>
+                        <strong>経験年数:</strong> 未経験
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-graduation-cap text-success me-2"></i>
+                        <strong>学歴:</strong> 明治学院大学法学部法律学科卒
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 興味・関心 -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-heart me-2"></i>
+                    興味・関心
+                </h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-robot text-primary me-2"></i>
+                        機械学習・AI技術
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-cloud text-info me-2"></i>
+                        クラウドインフラ構築
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-mobile-alt text-success me-2"></i>
+                        Webアプリ開発
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-users text-warning me-2"></i>
+                        チーム開発・マネジメント
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#<!-- コールトゥアクション -->#}
+{#<div class="row mt-5">#}
+{#    <div class="col-12">#}
+{#        <div class="card bg-primary text-white">#}
+{#            <div class="card-body text-center py-5">#}
+{#                <h3 class="fw-bold mb-3">#}
+{#                    <i class="fas fa-handshake me-3"></i>#}
+{#                    一緒にお仕事をしませんか？#}
+{#                </h3>#}
+{#                <p class="lead mb-4">#}
+{#                    新しい技術への挑戦と、チームでの協力的な開発を大切にしています。<br>#}
+{#                    採用やプロジェクトに関するご相談がございましたら、お気軽にお問い合わせください。#}
+{#                </p>#}
+{#                <div class="d-flex flex-wrap justify-content-center gap-3">#}
+{#                    <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg">#}
+{#                        <i class="fas fa-envelope me-2"></i>#}
+{#                        お問い合わせ#}
+{#                    </a>#}
+{#                    <a href="{{ url_for('posts_list') }}" class="btn btn-outline-light btn-lg">#}
+{#                        <i class="fas fa-newspaper me-2"></i>#}
+{#                        技術記事を見る#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/about.js') }}"></script>
+{% endblock %}

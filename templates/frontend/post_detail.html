@@ -1,0 +1,180 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}{{ post[1] }}{% endblock %}
+
+{% block extra_head %}
+<meta property="og:title" content="{{ post[1] }}">
+<meta property="og:description" content="{{ post[2][:150] }}...">
+<meta name="description" content="{{ post[2][:150] }}...">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- メイン記事コンテンツ -->
+    <div class="col-lg-8">
+        <article class="card">
+            <div class="card-body">
+                <!-- 記事ヘッダー -->
+                <header class="mb-4">
+                    <h1 class="display-6 fw-bold mb-3">{{ post[1] }}</h1>
+                    <div class="post-meta d-flex flex-wrap align-items-center gap-3">
+                        <span>
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            投稿日: {{ post[3][:10] }}
+                        </span>
+                        {% if post[4] and post[4] != post[3] %}
+                        <span>
+                            <i class="fas fa-edit me-2"></i>
+                            更新日: {{ post[4][:10] }}
+                        </span>
+                        {% endif %}
+                        <span>
+                            <i class="fas fa-clock me-2"></i>
+                            読了時間: {{ (post[2]|length / 500)|round|int }}分
+                        </span>
+                    </div>
+                </header>
+
+                <!-- 記事本文 -->
+                <div class="post-content">
+                    {{ post[2]|replace('\n', '<br>')|safe }}
+                </div>
+
+                <!-- シェアボタン -->
+                <div class="mt-5 pt-4 border-top">
+                    <h6 class="mb-3">この記事をシェア</h6>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="https://twitter.com/intent/tweet?text={{ post[1] }}&url={{ request.url }}" 
+                           target="_blank" 
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="fab fa-twitter me-1"></i>Twitter
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" 
+                           target="_blank" 
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="fab fa-facebook me-1"></i>Facebook
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url }}" 
+                           target="_blank" 
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="fab fa-linkedin me-1"></i>LinkedIn
+                        </a>
+                        <button onclick="copyToClipboard()" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-link me-1"></i>リンクをコピー
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- 前後の記事ナビゲーション -->
+        {% if prev_post or next_post %}
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        {% if prev_post %}
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="fas fa-chevron-left fa-2x text-muted"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted">前の記事</small>
+                                <div>
+                                    <a href="{{ url_for('post_detail', post_id=prev_post[0]) }}" 
+                                       class="text-decoration-none fw-bold">
+                                        {{ prev_post[1] }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        {% if next_post %}
+                        <div class="d-flex align-items-center justify-content-md-end">
+                            <div class="me-3 text-end">
+                                <small class="text-muted">次の記事</small>
+                                <div>
+                                    <a href="{{ url_for('post_detail', post_id=next_post[0]) }}" 
+                                       class="text-decoration-none fw-bold">
+                                        {{ next_post[1] }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <i class="fas fa-chevron-right fa-2x text-muted"></i>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- サイドバー -->
+    <div class="col-lg-4">
+        <!-- プロフィール簡易版 -->
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <img src="https://billboard-japan.com/scale/news/00000116/116078/800x_image.jpg"
+                     alt="プロフィール画像" 
+                     class="rounded-circle mb-3" 
+                     style="width: 100px; height: 100px;">
+                <h6 class="fw-bold">タピオカ職人</h6>
+                <p class="text-muted small mb-3">
+                    タピオカ職人<br>
+                    転職活動中
+                </p>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-primary btn-sm">
+                    詳しいプロフィール
+                </a>
+            </div>
+        </div>
+
+        <!-- 他の記事 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-list me-2"></i>
+                    他の記事
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('posts_list') }}" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-newspaper me-2"></i>
+                        記事一覧を見る
+                    </a>
+                    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-home me-2"></i>
+                        ホームに戻る
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- お問い合わせCTA -->
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <i class="fas fa-handshake fa-3x mb-3"></i>
+                <h6>お仕事のご相談</h6>
+                <p class="small mb-3">
+                    プロジェクトのご依頼や<br>
+                    採用についてのご相談は<br>
+                    お気軽にお問い合わせください
+                </p>
+                <a href="{{ url_for('contact') }}" class="btn btn-light btn-sm">
+                    お問い合わせ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/post_detail.js') }}"></script>
+{% endblock %}
