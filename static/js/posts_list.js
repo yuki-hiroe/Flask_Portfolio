@@ -12,9 +12,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-// 無限スクロール（将来の拡張用）
-function loadMorePosts() {
-    // 実装時はAJAXで追加の記事を読み込み
-    console.log('無限スクロール機能は将来実装予定');
-}
