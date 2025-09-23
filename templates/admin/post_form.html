@@ -159,46 +159,15 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/post_form.js') }}"></script>
+
+<!-- デバッグ情報 -->
 <script>
-// 削除確認
+console.log('Post form page loaded');
 {% if post %}
-function confirmDelete(postId, title) {
-    document.getElementById('deleteTitle').textContent = title;
-    document.getElementById('deleteForm').action = '/admin/post/' + postId + '/delete';
-    new bootstrap.Modal(document.getElementById('deleteModal')).show();
-}
+console.log('Edit mode: Post ID {{ post[0] }}');
+{% else %}
+console.log('Create mode');
 {% endif %}
-
-// フォームの保存前確認
-let hasChanges = false;
-const initialTitle = document.getElementById('title').value;
-const initialContent = document.getElementById('content').value;
-const initialPublished = document.getElementById('is_published').checked;
-
-// 変更検知
-document.getElementById('title').addEventListener('input', checkChanges);
-document.getElementById('content').addEventListener('input', checkChanges);
-document.getElementById('is_published').addEventListener('change', checkChanges);
-
-function checkChanges() {
-    hasChanges = (
-        document.getElementById('title').value !== initialTitle ||
-        document.getElementById('content').value !== initialContent ||
-        document.getElementById('is_published').checked !== initialPublished
-    );
-}
-
-// ページ離脱時の確認
-window.addEventListener('beforeunload', function (e) {
-    if (hasChanges) {
-        e.preventDefault();
-        e.returnValue = '';
-    }
-});
-
-// フォーム送信時は確認をスキップ
-document.querySelector('form').addEventListener('submit', function() {
-    hasChanges = false;
-});
 </script>
 {% endblock %}
