@@ -7,7 +7,7 @@
 <div class="profile-section">
     <div class="row align-items-center">
         <div class="col-md-4 text-center mb-4 mb-md-0">
-            <img src="https://billboard-japan.com/scale/news/00000116/116078/800x_image.jpg"
+            <img src="https://campaign.gongcha.co.jp/gongcha-friends/img/img_1.png"
                  alt="プロフィール画像" 
                  class="rounded-circle img-fluid shadow-lg" 
                  style="width: 250px; height: 250px; object-fit: cover;">
@@ -19,10 +19,9 @@
             </h1>
             <h2 class="h3 text-primary mb-3">タピオカ職人</h2>
             <p class="lead mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Cumque cupiditate est expedita optio quibusdam?
-                liquam amet at aut doloremque ea,
-                earum illum incidunt maxime non quasi quo reiciendis temporibus ullam!
+                ご覧いただきありがとうございます！<br>
+                大阪府生まれ、千葉県育ちの26歳、広江悠輝といいます！<br>
+                現在、某タピオカ店でアルバイトしながら、エンジニア転職へ向けて学習中です！<br>
             </p>
             <div class="d-flex flex-wrap gap-2">
                 <a href="{{ url_for('posts_list') }}" class="btn btn-outline-primary">
@@ -113,13 +112,31 @@
                             <div class="card-body">
                                 <h6 class="fw-bold">個人ブログ</h6>
                                 <p class="text-muted small">
-                                    Python/Flask + Bootstrap を使用した個人ブログアプリケーション。
+                                    Python/Flask + Bootstrap + JavaScript を使用した個人ブログアプリケーション。
                                     管理画面、記事投稿、レスポンシブデザイン対応。
                                 </p>
                                 <div class="d-flex flex-wrap gap-1">
                                     <span class="badge bg-primary">Python</span>
                                     <span class="badge bg-success">Flask</span>
                                     <span class="badge bg-info">Bootstrap</span>
+                                    <span class="badge bg-warning">JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card bg-light h-100">
+                            <div class="card-body">
+                                <h6 class="fw-bold">Todoアプリ</h6>
+                                <p class="text-muted small">
+                                    Python/Flask + Bootstrap + JavaScript を使用したTodoアプリケーション。
+                                    記事の作成、編集、削除ができる。レスポンシブデザイン対応。
+                                </p>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span class="badge bg-primary">Python</span>
+                                    <span class="badge bg-success">Flask</span>
+                                    <span class="badge bg-info">Bootstrap</span>
+                                    <span class="badge bg-warning">JavaScript</span>
                                 </div>
                             </div>
                         </div>
@@ -163,15 +180,15 @@
                                 Python プログラミング言語
                             </li>
                             <li class="mb-2">
-                                <i class="fas fa-book text-primary me-2"></i>
+                                <i class="fas fa-book text-success me-2"></i>
                                 Flask フレームワーク
                             </li>
                             <li class="mb-2">
-                                <i class="fas fa-book text-primary me-2"></i>
+                                <i class="fas fa-book text-warning me-2"></i>
                                 JavaScript プログラミング言語
                             </li>
                             <li class="mb-2">
-                                <i class="fas fa-book text-success me-2"></i>
+                                <i class="fas fa-book text-info me-2"></i>
                                 AWS クラウドサービス
                             </li>
                         </ul>
@@ -197,7 +214,7 @@
                     <div class="d-flex flex-wrap gap-1 mb-3">
                         <span class="badge bg-primary">Python</span>
                         <span class="badge bg-warning">JavaScript</span>
-                        <span class="badge bg-success">Java</span>
+                        <span class="badge bg-danger">Java</span>
                         <span class="badge bg-info">HTML/CSS</span>
                     </div>
                 </div>
@@ -240,6 +257,10 @@
             </div>
             <div class="card-body">
                 <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-calendar-day text-danger me-2"></i>
+                        <strong>生年月日:</strong> 1999/03/31
+                    </li>
                     <li class="mb-2">
                         <i class="fas fa-map-marker-alt text-danger me-2"></i>
                         <strong>所在地:</strong> 千葉県

@@ -27,6 +27,7 @@
             <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
                 <span class="badge bg-primary fs-6 px-3 py-2">Python</span>
                 <span class="badge bg-success fs-6 px-3 py-2">Flask</span>
+                <span class="badge bg-danger fs-6 px-3 py-2">Java</span>
                 <span class="badge bg-warning fs-6 px-3 py-2">JavaScript</span>
                 <span class="badge bg-info fs-6 px-3 py-2">React</span>
                 <span class="badge bg-secondary fs-6 px-3 py-2">Bootstrap</span>
@@ -34,7 +35,6 @@
         </div>
     </div>
 </div>
-
 <!-- 最新記事セクション -->
 <div class="row">
     <div class="col-12">
@@ -50,7 +50,7 @@
         </div>
     </div>
 </div>
-
+<!-- 記事がある場合 -->
 {% if posts %}
 <div class="row">
     {% for post in posts %}
@@ -78,8 +78,8 @@
     </div>
     {% endfor %}
 </div>
-{% else %}
 <!-- 記事がない場合 -->
+{% else %}
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -112,7 +112,13 @@
                         <div class="p-3">
                             <i class="fab fa-python fa-3x text-primary mb-2"></i>
                             <h6>Python</h6>
-                            <small class="text-muted">Flask, Django</small>
+                            <small class="text-muted">Flask</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="p-3">
+                            <i class="fab fa-java fa-3x text-primary mb-2"></i>
+                            <h6>Java</h6>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-3">
@@ -133,7 +139,7 @@
                         <div class="p-3">
                             <i class="fas fa-database fa-3x text-info mb-2"></i>
                             <h6>Database</h6>
-                            <small class="text-muted">SQL, NoSQL</small>
+                            <small class="text-muted">SQL</small>
                         </div>
                     </div>
                 </div>
