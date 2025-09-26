@@ -14,9 +14,8 @@ def reset_database():
 
         # 管理者作成
         admin = Admin(username='admin')
-        password = admin.set_password('admin123')
-        hashed_password = generate_password_hash(password)
-        db.session.add(hashed_password)
+        admin.set_password('admin123')
+        db.session.add(admin)
         db.session.commit()
         print("Admin created successfully: admin/admin123")
 
