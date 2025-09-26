@@ -1,8 +1,7 @@
 from app import db, Admin, app
-from werkzeug.security import generate_password_hash
 
 
-def reset_database():
+def create_admin():
     with app.app_context():
         # テーブル削除
         db.drop_all()
@@ -21,4 +20,4 @@ def reset_database():
 
 
 if __name__ == '__main__':
-    reset_database()
+    create_admin()
