@@ -1,17 +1,25 @@
 from app import db, Admin, app
 from werkzeug.security import generate_password_hash
 
-def create_admin():
+
+def reset_database():
     with app.app_context():
-        # 新しい管理者作成
-        admin = Admin(
-            username='admin',
-            password_hash=generate_password_hash('admin123')
-        )
-        db.session.add(admin)
+        # テーブル削除
+        db.drop_all()
+        print("All tables dropped")
+
+        # テーブル再作成
+        db.create_all()
+        print("Tables recreated")
+
+        # 管理者作成
+        admin = Admin(username='admin')
+        password = admin.set_password('admin123')
+        hashed_password = generate_password_hash(password)
+        db.session.add(hashed_password)
         db.session.commit()
-        print("New admin created: admin/admin123")
+        print("Admin created successfully: admin/admin123")
 
 
 if __name__ == '__main__':
-    create_admin()
+    reset_database()

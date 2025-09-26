@@ -1,5 +1,4 @@
 from app import db, Admin, app
-from werkzeug.security import generate_password_hash
 
 def check_admins():
     with app.app_context():
@@ -11,18 +10,7 @@ def check_admins():
 
         if not admins:
             print("No admin accounts found!")
-            # 新しい管理者作成
-            admin = Admin(
-                username='admin',
-                password_hash=generate_password_hash('admin123')
-            )
-            db.session.add(admin)
-            db.session.commit()
-            print("New admin created: admin/admin123")
-        else:
-            print("Admin account already exists")
-            print(f"Username: {admin.username}, ID: {admin.id}")
-            print(f"Has password: {bool(admin.password_hash)}")
+
 
 
 if __name__ == '__main__':
