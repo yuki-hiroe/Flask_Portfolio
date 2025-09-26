@@ -35,7 +35,7 @@ class Admin(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    password_hash = db.Column(db.String(120), nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -403,19 +403,19 @@ def admin_change_password():
 #     return render_template('test_page.html')
 
 
-# @app.route('/reset-db')
-# def reset_db():
-#     with app.app_context():
-#         db.drop_all()
-#         db.create_all()
-#
-#         # デフォルト管理者再作成
-#         admin = Admin(username='admin')
-#         admin.set_password('admin123')
-#         db.session.add(admin)
-#         db.session.commit()
-#
-#         return "データベースをリセットしました。admin/admin123 でログインできます。"
+@app.route('/reset-db')
+def reset_db():
+    with app.app_context():
+        db.drop_all()
+        db.create_all()
+
+        # デフォルト管理者再作成
+        admin = Admin(username='admin')
+        admin.set_password('admin123')
+        db.session.add(admin)
+        db.session.commit()
+
+        return "データベースをリセットしました。admin/admin123 でログインできます。"
 
 
 if __name__ == '__main__':

@@ -21,6 +21,8 @@ def check_admins():
             print("New admin created: admin/admin123")
         else:
             print("Admin account already exists")
+            print(f"Username: {admin.username}, ID: {admin.id}")
+            print(f"Has password: {bool(admin.password_hash)}")
 
 
 if __name__ == '__main__':
