@@ -11,7 +11,6 @@ def check_admins():
 
         if not admins:
             print("No admin accounts found!")
-        else:
             # 新しい管理者作成
             admin = Admin(
                 username='admin',
@@ -20,6 +19,8 @@ def check_admins():
             db.session.add(admin)
             db.session.commit()
             print("New admin created: admin/admin123")
+        else:
+            print("Admin account already exists")
 
 
 if __name__ == '__main__':
