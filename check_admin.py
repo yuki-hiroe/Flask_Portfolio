@@ -1,6 +1,5 @@
 from app import db, Admin, app
 
-
 def check_admins():
     with app.app_context():
         admins = Admin.query.all()
