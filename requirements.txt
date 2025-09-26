@@ -401,7 +401,7 @@ watchdog @ file:///Users/builder/cbouss/crwatchdog/watchdog_1717177010913/work
 wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
 webencodings @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/webencodings_1699243630039/work
 websocket-client @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_d37u7gqts8/croot/websocket-client_1715878310260/work
-Werkzeug==3.0.1
+Werkzeug==3.0.6
 whatthepatch @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/whatthepatch_1699243659982/work
 wheel==0.45.1
 widgetsnbextension @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_45ynevdsp5/croot/widgetsnbextension_1710960054121/work

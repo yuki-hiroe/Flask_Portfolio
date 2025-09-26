@@ -4,12 +4,23 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from functools import wraps
 import os
+import sys
 
 app = Flask(__name__)
-# app.secret_key = 'my-secretkey'  # 本番環境では環境変数から取得
 
 # SQLAlchemy設定
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+# 本番環境（Heroku）ではPostgreSQL、開発環境ではSQLite
+if os.environ.get('DATABASE_URL'):
+    # Heroku PostgreSQL
+    database_url = os.environ.get('DATABASE_URL')
+    if database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+else:
+    # ローカル開発環境
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.urandom(32)
 db = SQLAlchemy(app)
@@ -408,6 +419,8 @@ def reset_db():
 
 
 if __name__ == '__main__':
-    init_db()
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    if len(sys.argv) > 1 and sys.argv[1] == 'init':
+        init_db()
+    else:
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port=port)
