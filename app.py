@@ -6,11 +6,12 @@ from functools import wraps
 import os
 
 app = Flask(__name__)
-app.secret_key = 'my-secretkey'  # 本番環境では環境変数から取得
+# app.secret_key = 'my-secretkey'  # 本番環境では環境変数から取得
 
 # SQLAlchemy設定
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.urandom(32)
 db = SQLAlchemy(app)
 
 
