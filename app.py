@@ -403,19 +403,19 @@ def admin_change_password():
 #     return render_template('test_page.html')
 
 
-@app.route('/reset-db')
-def reset_db():
-    with app.app_context():
-        db.drop_all()
-        db.create_all()
-
-        # デフォルト管理者再作成
-        admin = Admin(username='admin')
-        admin.set_password('admin123')
-        db.session.add(admin)
-        db.session.commit()
-
-        return "データベースをリセットしました。admin/admin123 でログインできます。"
+# @app.route('/reset-db')
+# def reset_db():
+#     with app.app_context():
+#         db.drop_all()
+#         db.create_all()
+#
+#         # デフォルト管理者再作成
+#         admin = Admin(username='admin')
+#         admin.set_password('admin123')
+#         db.session.add(admin)
+#         db.session.commit()
+#
+#         return "データベースをリセットしました。admin/admin123 でログインできます。"
 
 
 if __name__ == '__main__':
