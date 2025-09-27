@@ -42,8 +42,8 @@ bash
 bash
    python app.py
 ブラウザでアクセス
-フロントエンド: http://127.0.0.1:5000
-管理画面: http://127.0.0.1:5000/login
+フロントエンド: https://portfolio-yuki-2025-dfce81f5cdc4.herokuapp.com/home
+管理画面: https://portfolio-yuki-2025-dfce81f5cdc4.herokuapp.com/login
 デフォルトログイン情報
 ユーザー名: admin
 パスワード: admin123
