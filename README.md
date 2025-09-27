@@ -50,19 +50,26 @@ bash
 📁 プロジェクト構造
 Flask_Portfolio/
 ├── app.py                      # メインアプリケーション
+├── check_admin.py
+├── create_admin.py
+├── init_database.py            # 管理者データの初期化 
 ├── requirements.txt            # 依存関係
+├── Procfile
+├── runtime.txt
 ├── instance/
-│   ├── blog.db                 # SQLiteデータベース
+│   └── blog.db                 # SQLiteデータベース
 ├── static/                     # 静的ファイル
 │   ├── css/
 │   │   ├── about.cs
 │   │   └── base_style.css
+│   ├── img/
+│   │   └── 証明写真20250617.jpg
 │   └── js/
 │       ├── 404.js 
 │       ├── about.js
 │       ├── change_password.js
 │       ├── post_detail.js
-│       ├── post_form.js # 記事フォーム用JS
+│       ├── post_form.js        # 記事フォーム用JS
 │       ├── posts.js
 │       └── posts_list.js
 └── templates/                  # HTMLテンプレート
@@ -90,49 +97,7 @@ Flask_Portfolio/
 記事閲覧: ホームページで最新記事を確認
 記事一覧: /posts で全記事を確認
 プロフィール: /about で詳細なプロフィールを確認
-お問い合わせ: /contact で連絡フォームを利用
-⚙️ 設定
-環境変数（推奨）
-.env ファイルを作成して設定：
 
-env
-FLASK_ENV=development
-SECRET_KEY=your-secret-key-here
-DATABASE_URL=sqlite:///blog.db
-データベースの初期化
-bash
-python -c "from app import init_db; init_db()"
-本番環境での設定
-python
-# app.py
-import os
-
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback-key')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///blog.db')
-🎨 カスタマイズ
-プロフィール情報の変更
-templates/frontend/home.html - ホームページのプロフィール
-templates/frontend/about.html - 詳細プロフィール
-デザインの調整
-templates/frontend/base.html の CSS変数を編集
-Bootstrap クラスを変更してレイアウト調整
-機能の拡張
-画像アップロード: Flask-Uploadsを追加
-コメント機能: Comment モデルを追加
-カテゴリー機能: Category モデルを追加
-📝 API（将来的な拡張）
-REST APIを追加する場合の例：
-
-python
-@app.route('/api/posts', methods=['GET'])
-def api_posts():
-    posts = Post.query.filter_by(is_published=True).all()
-    return jsonify([{
-        'id': post.id,
-        'title': post.title,
-        'content': post.content,
-        'created_at': post.created_at.isoformat()
-    } for post in posts])
 🧪 テスト
 bash
 # テストの実行
@@ -140,6 +105,7 @@ python -m pytest tests/
 
 # カバレッジレポート
 pytest --cov=app tests/
+
 🚢 デプロイ
 Heroku にデプロイ
 Procfile を作成
@@ -149,26 +115,8 @@ bash
    pip freeze > requirements.txt
 Heroku CLI でデプロイ
 bash
-   heroku create your-blog-name
-   git push heroku main
-Docker を使用
-dockerfile
-FROM python:3.9-slim
-
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY . .
-
-EXPOSE 5000
-CMD ["python", "app.py"]
-🤝 貢献
-このリポジトリをフォーク
-機能ブランチを作成 (git checkout -b feature/amazing-feature)
-変更をコミット (git commit -m 'Add amazing feature')
-ブランチをプッシュ (git push origin feature/amazing-feature)
-プルリクエストを作成
+   heroku create portfolio-yuki-2025
+   git push heroku master
 
 👨‍💻 作者
 Yuki Hiroe
@@ -178,6 +126,7 @@ Email: yuhiro0331@gmail.com
 
 📚 参考資料
 Flask公式ドキュメント
+JavaScript公式ドキュメント
 SQLAlchemy公式ドキュメント
 Bootstrap公式ドキュメント
 
