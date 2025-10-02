@@ -384,25 +384,6 @@ def admin_change_password():
     return render_template('admin/change_password.html')
 
 
-# ===========================================
-# デバッグ・テスト用ルート（本番では削除）
-# ===========================================
-
-# @app.route('/debug/session')
-# def debug_session():
-#     return {
-#         'session_data': dict(session),
-#         'admin_logged_in': 'admin_logged_in' in session,
-#         'admin_username': session.get('admin_username', 'Not set')
-#     }
-#
-#
-# @app.route('/test')
-# @login_required
-# def test_page():
-#     return render_template('test_page.html')
-
-
 @app.route('/reset-db')
 def reset_db():
     with app.app_context():
